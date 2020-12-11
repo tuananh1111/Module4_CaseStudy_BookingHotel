@@ -5,6 +5,7 @@ import com.example.demo.repository.hotel.IHotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.ws.Holder;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,11 +25,29 @@ public class HotelServiceImpl implements IHotelService {
 
     @Override
     public void delete(Long id) {
-        hotelRepository.deleteById(id);
+        Hotel hotel= hotelRepository.findHotelById(id);
+        hotel.setStatus(false);
+        hotelRepository.save(hotel);
+    }
+    @Override
+    public void activeUser(Long id){
+        Hotel hotel= hotelRepository.findHotelById(id);
+        hotel.setStatus(true);
+        hotelRepository.save(hotel);
     }
 
     @Override
     public Optional<Hotel> findById(Long id) {
         return hotelRepository.findById(id);
     }
+    @Override
+    public Optional<Hotel> findByName(String name){
+        return hotelRepository.findHotelsByNameContaining(name);
+    }
+
+    @Override
+    public Hotel findOne(Long id) {
+        return hotelRepository.findHotelById(id);
+    }
+
 }

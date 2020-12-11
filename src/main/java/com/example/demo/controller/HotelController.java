@@ -9,10 +9,7 @@ import com.example.demo.service.province.IProvinceService;
 import com.example.demo.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -72,8 +69,31 @@ public class HotelController {
     public ModelAndView updateHotel(@ModelAttribute Hotel hotel){
         hotelService.save(hotel);
         ModelAndView modelAndView= new ModelAndView("hotel/edit");
-        modelAndView.addObject("hotel",new Hotel());
+//        modelAndView.addObject("hotel",new Hotel());
         modelAndView.addObject("message","Update Hotel Successfully!!!");
+        return modelAndView;
+    }
+    @GetMapping("/non-active-hotel/{id}")
+    public ModelAndView nonActiveHotel(@PathVariable Long id){
+        hotelService.delete(id);
+        ModelAndView modelAndView= new ModelAndView("hotel/list");
+        List<Hotel> list= hotelService.findAll();
+        modelAndView.addObject("list", list);
+        return modelAndView;
+    }
+    @GetMapping("/active-hotel/{id}")
+    public ModelAndView activeHotel(@PathVariable Long id){
+        hotelService.activeUser(id);
+        ModelAndView modelAndView= new ModelAndView("hotel/list");
+        List<Hotel> list= hotelService.findAll();
+        modelAndView.addObject("list", list);
+        return modelAndView;
+    }
+    @GetMapping("/search-hotel")
+    public ModelAndView searchHotel(@RequestParam("search") String name){
+        Optional<Hotel> hotels = hotelService.findByName(name);
+        ModelAndView modelAndView= new ModelAndView("hotel/list");
+        modelAndView.addObject("list", hotels.get());
         return modelAndView;
     }
 }

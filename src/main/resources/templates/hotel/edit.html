@@ -52,7 +52,7 @@
             <td>User</td>
             <td>
                 <select name="user">
-                    <option th:each="u:${users}" th:value="${u.id}" th:selected="(${u.id}==*{user.id})"  th:text="${u.fullName}" ></option>
+                    <option th:each="u:${users}" th:value="${u.id}"   th:text="${u.fullName}" th:selected="(${u.id}==*{user.id})" ></option>
                 </select>
             </td>
         </tr>

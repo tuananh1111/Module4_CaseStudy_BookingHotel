@@ -13,8 +13,6 @@ public class User {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty
     private String fullName;
 
     @Pattern(regexp="(^$|[0-9]{10})")

@@ -24,7 +24,7 @@ public class Hotel {
     private String hotline;
 
     private String description;
-    private Integer status;
+    private boolean status;
 
     @ManyToOne
     private Province province;

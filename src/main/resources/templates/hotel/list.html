@@ -29,7 +29,9 @@
             <th>Status</th>
             <th>Province</th>
             <th>User Host</th>
-            <th>Action</th>
+            <th>Edit</th>
+            <th>Non-Active</th>
+            <th>Active</th>
         </tr>
         <tr th:each="hotel : ${list}">
             <td th:text="${hotel.id}"></td>
@@ -39,11 +41,12 @@
             <td th:text="${hotel.description}"></td>
             <td th:text="${hotel.status}"></td>
             <td th:text="${hotel.province.name}"></td>
-            <td th:text="${hotel.user.getFullName()}"></td>
+            <td th:text="${hotel.user.fullName}"></td>
             <td>
                 <a th:href="@{/edit-hotel/__${hotel.id}__}" class="btn btn-primary">Edit</a>
-                <a th:href="@{/delete-hotel/__${hotel.id}__}" class="btn btn-danger">Delete</a>
             </td>
+                <td><a th:href="@{/non-active-hotel/__${hotel.id}__}" class="btn btn-danger">Non-Active</a></td>
+            <td><a th:href="@{/active-hotel/__${hotel.id}__}" class="btn btn-outline-warning">Active</a></td>
         </tr>
     </table>
     <a href="/create-hotel" class="btn btn-success">Add Hotel</a>
