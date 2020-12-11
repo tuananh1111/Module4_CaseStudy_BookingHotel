@@ -12,57 +12,27 @@
 <body>
 <h1>Edit Hotel</h1>
 <p>
-    <a href="/admin/hotel">Back to the list</a>
+    <a href="/admin/category">Back to the list</a>
 </p>
 <div th:if="${message}" style="color: green">
     <p th:text="${message}"></p>
 </div>
-<form th:action="@{/admin/edit-hotel}" th:object="${hotel}" method="post">
+<form th:action="@{/admin/edit-category}" th:object="${category}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>
             <td>Name</td>
             <td><input type="text" th:field="*{name}"></td>
         </tr>
-        <tr>
-            <td>Image</td>
-            <td><input type="file" th:field="*{image}"></td>
-        </tr>
-        <tr>
-            <td>Address Details</td>
-            <td><input type="text" th:field="*{addressDetails}"></td>
-        </tr>
-        <tr>
-            <td>Hotline</td>
-            <td><input type="text" th:field="*{hotline}"></td>
-        </tr>
+
         <tr>
             <td>Description</td>
             <td><input type="text" th:field="*{description}"></td>
         </tr>
-        <tr>
-            <td>Status</td>
-            <td><input type="text" th:field="*{status}"></td>
-        </tr>
-        <tr>
-            <td>Province</td>
-            <td>
-                <select name="province">
-                    <option th:each="pro:${provinces}" th:value="${pro.id}" th:text="${pro.name}" th:selected="(${pro.id}==*{province.id})"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>User</td>
-            <td>
-                <select name="user">
-                    <option th:each="u:${users}" th:value="${u.id}"   th:text="${u.fullName}" th:selected="(${u.id}==*{user.id})" ></option>
-                </select>
-            </td>
-        </tr>
+
         <tr>
             <td></td>
-            <td><input type="submit" value="Update Hotel"></td>
+            <td><input type="submit" value="Update Category"></td>
         </tr>
     </table>
 </form>

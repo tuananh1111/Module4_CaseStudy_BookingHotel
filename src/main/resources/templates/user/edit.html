@@ -12,12 +12,12 @@
 <body>
 <h1>Edit User</h1>
 <p>
-    <a href="/home">Back to the list</a>
+    <a href="/admin/home">Back to the list</a>
 </p>
 <div th:if="${message}" style="color: green">
     <p th:text="${message}"></p>
 </div>
-<form th:action="@{/edit-user}" th:object="${user}" method="post">
+<form th:action="@{/admin/edit-user}" th:object="${user}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>

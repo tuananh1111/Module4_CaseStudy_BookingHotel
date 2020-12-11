@@ -12,48 +12,30 @@
 <body>
 <div class="col-3"></div>
 <div class="container col-6">
-    <form th:action="@{/admin/search-hotel}">
+    <form th:action="@{/admin/search-category}">
         <div>
             <input type="text" name="search" >
             <input type="submit" value="Search">
         </div>
     </form>
-    <h1>Manage Hotel</h1>
+    <h1>Manage Category</h1>
     <table class="table table-active" border="1px">
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Image</th>
-            <th>Address Details</th>
-            <th>Hotline</th>
             <th>Description</th>
-            <th>Status</th>
-            <th>Province</th>
-            <th>User Host</th>
             <th>Edit</th>
-            <th>Non-Active</th>
-            <th>Active</th>
+            <th>Delete</th>
         </tr>
-        <tr th:each="hotel : ${list}">
-            <td th:text="${hotel.id}"></td>
-            <td th:text="${hotel.name}"></td>
-            <td>
-                <img th:src="@{'' + ${hotel.image}}" style="height: 150px;width: 150px">
-            </td>
-            <td th:text="${hotel.addressDetails}"></td>
-            <td th:text="${hotel.hotline}"></td>
-            <td th:text="${hotel.description}"></td>
-            <td th:text="${hotel.status}"></td>
-            <td th:text="${hotel.province.name}"></td>
-            <td th:text="${hotel.user.fullName}"></td>
-            <td>
-                <a th:href="@{/admin/edit-hotel/__${hotel.id}__}" class="btn btn-primary">Edit</a>
-            </td>
-                <td><a th:href="@{/admin/non-active-hotel/__${hotel.id}__}" class="btn btn-danger">Non-Active</a></td>
-            <td><a th:href="@{/admin/active-hotel/__${hotel.id}__}" class="btn btn-outline-warning">Active</a></td>
+        <tr th:each="category : ${list}">
+            <td th:text="${category.id}"></td>
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td><a th:href="@{/admin/edit-category/__${category.id}__}" class="btn btn-primary">Edit</a></td>
+            <td><a th:href="@{/admin/delete-category/__${category.id}__}" class="btn btn-danger">Delete</a></td>
         </tr>
     </table>
-    <a href="/admin/create-hotel" class="btn btn-success">Add Hotel</a>
+    <a href="/admin/create-category" class="btn btn-success">Add Category</a>
 </div>
 </body>
 </html>

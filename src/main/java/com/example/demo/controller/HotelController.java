@@ -1,21 +1,26 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Hotel;
-import com.example.demo.model.Province;
-import com.example.demo.model.Role;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.service.hotel.IHotelService;
 import com.example.demo.service.province.IProvinceService;
 import com.example.demo.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.xml.ws.Holder;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
+//@RequestMapping("/admin")
 public class HotelController {
 
     @Autowired
@@ -26,6 +31,8 @@ public class HotelController {
 
     @Autowired
     private IUserService userService;
+    @Value("${upload.path}")
+    private String fileUpload;
 
     @ModelAttribute("users")
     public List<User> users(){
@@ -47,16 +54,31 @@ public class HotelController {
     @GetMapping("/create-hotel")
     public ModelAndView showFormCreate(){
         ModelAndView modelAndView= new ModelAndView("hotel/create");
-        modelAndView.addObject("hotel", new Hotel());
+        modelAndView.addObject("hotelForm", new HotelForm());
         return modelAndView;
     }
+//    @PostMapping("/create-hotel")
+//    public ModelAndView saveHotel(@ModelAttribute Hotel hotel){
+//        hotelService.save(hotel);
+//        ModelAndView modelAndView= new ModelAndView("hotel/create");
+//        modelAndView.addObject("hotel", new Hotel());
+//        modelAndView.addObject("message","Save Hotel Successful!!!");
+//        return modelAndView;
+//    }
     @PostMapping("/create-hotel")
-    public ModelAndView saveHotel(@ModelAttribute Hotel hotel){
+    public RedirectView saveHotel(@ModelAttribute HotelForm hotelForm) {
+        Hotel hotel = new Hotel( hotelForm.getName(), hotelForm.getAddressDetails(), hotelForm.getHotline(),
+                hotelForm.getDescription(), hotelForm.isStatus(), hotelForm.getProvince(), hotelForm.getUser());
+        MultipartFile multipartFile = hotelForm.getImage();
+        String fileName = multipartFile.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(hotelForm.getImage().getBytes(), new File(this.fileUpload + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        hotel.setImage(fileName);
         hotelService.save(hotel);
-        ModelAndView modelAndView= new ModelAndView("hotel/create");
-        modelAndView.addObject("hotel", new Hotel());
-        modelAndView.addObject("message","Save Hotel Successful!!!");
-        return modelAndView;
+        return new RedirectView("/hotel");
     }
     @GetMapping("/edit-hotel/{id}")
     public ModelAndView showFormEdit(@PathVariable Long id){

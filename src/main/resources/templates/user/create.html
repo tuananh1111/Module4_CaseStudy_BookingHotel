@@ -12,12 +12,12 @@
 <body>
 <h1>Create customer</h1>
 <p>
-    <a href="/home">USER list</a>
+    <a href="/admin/home">USER list</a>
 </p>
 <div th:if="${message}" style="color: green">
     <p th:text="${message}"></p>
 </div>
-<form th:action="@{/create-user}" th:object="${user}" method="post">
+<form th:action="@{/admin/create-user}" th:object="${user}" method="post">
     <table>
         <tr>
             <td>Full Name:</td>
