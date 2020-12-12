@@ -24,6 +24,7 @@ public class Hotel {
     private String hotline;
 
     private String description;
+    @Column(columnDefinition = "boolean default false")
     private boolean status;
     private String image;
 

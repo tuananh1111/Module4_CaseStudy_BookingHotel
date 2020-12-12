@@ -12,12 +12,12 @@
 <body>
 <h1>Edit Hotel</h1>
 <p>
-    <a href="/admin/hotel">Back to the list</a>
+    <a href="/hotel">Back to the list</a>
 </p>
 <div th:if="${message}" style="color: green">
     <p th:text="${message}"></p>
 </div>
-<form th:action="@{/admin/edit-hotel}" th:object="${hotel}" method="post">
+<form th:action="@{/edit-hotel}" th:object="${hotel}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <table>
         <tr>

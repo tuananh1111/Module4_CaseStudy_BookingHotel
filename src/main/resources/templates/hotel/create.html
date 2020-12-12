@@ -12,12 +12,12 @@
 <body>
 <h1>Create Hotel</h1>
 <p>
-    <a href="/admin/hotel">Hotel list</a>
+    <a href="/hotel">Hotel list</a>
 </p>
 <div th:if="${message}" style="color: green">
     <p th:text="${message}"></p>
 </div>
-<form th:action="@{/admin/create-hotel}" th:object="${hotelForm}" method="post" enctype="multipart/form-data">
+<form th:action="@{/create-hotel}" th:object="${hotelForm}" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Name:</td>

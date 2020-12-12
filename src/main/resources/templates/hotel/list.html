@@ -12,7 +12,7 @@
 <body>
 <div class="col-3"></div>
 <div class="container col-6">
-    <form th:action="@{/admin/search-hotel}">
+    <form th:action="@{/search-hotel}">
         <div>
             <input type="text" name="search" >
             <input type="submit" value="Search">
@@ -47,13 +47,13 @@
             <td th:text="${hotel.province.name}"></td>
             <td th:text="${hotel.user.fullName}"></td>
             <td>
-                <a th:href="@{/admin/edit-hotel/__${hotel.id}__}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/edit-hotel/__${hotel.id}__}" class="btn btn-primary">Edit</a>
             </td>
-                <td><a th:href="@{/admin/non-active-hotel/__${hotel.id}__}" class="btn btn-danger">Non-Active</a></td>
-            <td><a th:href="@{/admin/active-hotel/__${hotel.id}__}" class="btn btn-outline-warning">Active</a></td>
+                <td><a th:href="@{/non-active-hotel/__${hotel.id}__}" class="btn btn-danger">Non-Active</a></td>
+            <td><a th:href="@{/active-hotel/__${hotel.id}__}" class="btn btn-outline-warning">Active</a></td>
         </tr>
     </table>
-    <a href="/admin/create-hotel" class="btn btn-success">Add Hotel</a>
+    <a href="/create-hotel" class="btn btn-success">Add Hotel</a>
 </div>
 </body>
 </html>
