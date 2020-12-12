@@ -32,7 +32,7 @@
                 <img th:src="@{'' + ${image.url}}" style="height: 250px;width: 200px">
             </td>
             <td th:text="${image.room.id}"></td>
-            <td><a th:href="@{/delete-image/__${image.id}__}">Delete</a></td>
+            <td><a th:href="@{/delete-image/__${image.id}__}" class="btn btn-btn-warning">Delete</a></td>
         </tr>
     </table>
     <a href="/create-image" class="btn btn-success">Add Category</a>
